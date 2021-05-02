@@ -13,7 +13,7 @@ function Tweet({ tweet }) {
     <div className="tweet">
       <Avatar hash={tweet.gravatar}/>
       <div className="content">
-        <NameWithHandle author={tweet.author}/><Time timestamp={tweet.timestamp}/>
+        <NameWithHandle author={tweet.author}></NameWithHandle><Time timestamp={tweet.timestamp}/>
         <Message text={tweet.message}/>
         <div className="buttons">
           <ReplyButton />
@@ -22,7 +22,12 @@ function Tweet({ tweet }) {
           <MoreOptionsButton/>
         </div>
         <span>
-          <Envelope fromPerson={tweet.testFromAddressLabel} toPerson={tweet.testToAddressLabel}/>
+          <Envelope fromPerson={tweet.testFromAddressLabel} toPerson={tweet.testToAddressLabel}></Envelope>
+        </span>
+
+        <span>
+          {tweet.children}
+          {console.log("Tweet children", tweet.children)}
         </span>
       </div>
     </div>
@@ -124,6 +129,7 @@ const Envelope = ({ fromPerson, toPerson }) => {
       <br/>
       <span>
         {toPerson.recipient} {toPerson.address} {toPerson.city}
+        {console.log(fromPerson.children)}
       </span>
     </div>
   );
