@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import './index.css';
+import moment from 'moment';
+import Time from './time';
 
 const FileList = ({ files }) => (
   <table className="file-list">
@@ -47,9 +49,22 @@ const testFiles = [
   }
 ]; 
 
+// const FileListItem = ({ file }) => (
+//   <tr className="file-list-item">
+//     {getFileName(file)}
+//     <CommitMessage commit={file.latestCommit}/>
+//     <td className="age">
+//       <Time time={file.updated_at}/>
+//     </td>
+//   </tr>
+// )
+
 const FileListItem = ({ file }) => (
   <tr className="file-list-item">
-    {getFileName(file)}
+    <td><FileIcon file={file}/></td>
+    <td><FileName file={file}/></td>
+    <td><CommitMessage commit={file.latestCommit}/></td>
+    <td><Time time={file.updated_at}/></td>
   </tr>
 )
 
@@ -64,35 +79,33 @@ const FileIcon = ({ file }) => {
   }
 
   return (
-    <td className="file-icon">
+    <span className="file-icon">
       <i className={`fa ${icon}`}/>
-    </td>
+    </span>
   );
 }
 
+const FileName = ({ file }) => (
+  <span className="file-name">
+    {getFileName(file)}
+  </span>
+);
+
 const getFileName = (file) => {
   return [<FileIcon file={file} key={0}/>,
-    <td className="file-name" key={1}> {file.name }</td>
+    <span className="file-name" key={1}> {file.name}</span>
   ];
 }
 
 const CommitMessage = ({ commit }) => (
-  <td className="commit-message">
+  <span className="commit-message">
     {commit.message}
-  </td>
+  </span>
 );
 
 CommitMessage.propTypes = {
   commit: PropTypes.object.isRequired
 }
-
-// function Time({ time }) {
-//   return (
-//     <div></div>
-//   );
-// }
-
-
 
 ReactDOM.render(
   <FileList files={testFiles}/>, 
