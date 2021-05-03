@@ -49,16 +49,6 @@ const testFiles = [
   }
 ]; 
 
-// const FileListItem = ({ file }) => (
-//   <tr className="file-list-item">
-//     {getFileName(file)}
-//     <CommitMessage commit={file.latestCommit}/>
-//     <td className="age">
-//       <Time time={file.updated_at}/>
-//     </td>
-//   </tr>
-// )
-
 const FileListItem = ({ file }) => (
   <tr className="file-list-item">
     <td><FileIcon file={file}/></td>
