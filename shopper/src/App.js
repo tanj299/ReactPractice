@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+import React from 'react';
+import Nav from './Nav';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+/**
+ * App is the most top-level component
+ * App (Parent) -> ItemPage, CartPage, Item, Nav (Children)
+ */
+
+class App extends React.Component {
+  state = {
+    activeTab: 0
+  };
+
+  handleTabChange = (index) => {
+    this.setState({
+      activeTab: index
+    })
+  }
+
+  renderContent() {
+    switch(this.state.activeTab) {
+      case 0: return <span> Empty </span>;
+      case 1: return <span> Cart </span>;
+      default: 
+    }
+  }
+
+  render() {
+    let {activeTab} = this.state; 
+    return (
+      <div className="App">
+        <Nav activeTab={activeTab} onTabChange={this.handleTabChange}/>
+        <main className="App-content">
+          {this.renderContent()}
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;
