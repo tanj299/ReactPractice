@@ -1,6 +1,8 @@
 import React from 'react';
 import Nav from './Nav';
 import './App.css';
+import ItemPage from './ItemPage';
+import {items} from './static-data';
 
 /**
  * App is the most top-level component
@@ -9,19 +11,26 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    activeTab: 0
+    activeTab: 0,
+    cart: []
   };
 
   handleTabChange = (index) => {
     this.setState({
       activeTab: index
-    })
+    });
+  }
+
+  handleAddToCart = (item) => {
+    this.setState({
+      cart: [...this.state.cart, item.id]
+    });
   }
 
   renderContent() {
     switch(this.state.activeTab) {
-      case 0: return <span> Empty </span>;
-      case 1: return <span> Cart </span>;
+      case 0: return <ItemPage items={items} onAddToCart={this.handleAddToCart}/>
+      case 1: return <span> Cart </span>
       default: 
     }
   }

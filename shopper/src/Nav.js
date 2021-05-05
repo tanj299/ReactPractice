@@ -7,7 +7,7 @@ const Nav = ({ activeTab, onTabChange}) => (
                 <a onClick={() => onTabChange(0)}> Items </a>
             </li>
             <li className={`App-nav-item ${activeTab === 1} && 'selected'`}>
-                <a onClick={() => onTabChange(1)}> Cart </a>
+                <a onClick={() => onTabChange(1)}> Cart</a>
             </li>
         </ul>
     </nav>
