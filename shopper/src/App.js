@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './Nav';
 import './App.css';
 import ItemPage from './ItemPage';
+import CartPage from './CartPage';
 import {items} from './static-data';
 
 /**
@@ -27,10 +28,35 @@ class App extends React.Component {
     });
   }
 
+  // Count how many of each item is in the cart
+  renderCart() {
+    let itemCounts = this.state.cart.reduce((itemCounts, itemId) => {
+      itemCounts[itemId] = itemCounts[itemId] || 0;
+      itemCounts[itemId]++;
+      return itemCounts;
+    }, {});
+
+    // Create an array of items
+    let cartItems = Object.keys(itemCounts).map(itemId => {
+      // Find the item by its id
+      let item = items.find(item => item.id === parseInt(itemId, 10));
+
+      // Create a new "item" that also has a 'count' property
+      return {
+        ...item, 
+        count: itemCounts[itemId]
+      }
+    });
+
+    return (
+      <CartPage items={cartItems}/>
+    )
+  }
+
   renderContent() {
     switch(this.state.activeTab) {
       case 0: return <ItemPage items={items} onAddToCart={this.handleAddToCart}/>
-      case 1: return <span> Cart </span>
+      case 1: return this.renderCart();
       default: 
     }
   }
