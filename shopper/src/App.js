@@ -30,9 +30,10 @@ class App extends React.Component {
 
   handleRemoveOne = (item) => {
     const index = this.state.cart.indexOf(item.id);
+    // Use spread operator to take left half of array up to item removed, and take the right half of the array and combine
     this.setState({
       cart: [...this.state.cart.slice(0, index), ...this.state.cart.slice(index + 1)]
-    })
+    });
   }
 
   // Count how many of each item is in the cart

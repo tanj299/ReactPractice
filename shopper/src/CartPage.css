@@ -7,6 +7,11 @@
     list-style: none;
 }
 
+.CartPage-empty {
+    text-align: center;
+    border: 1px #fff;
+}
+
 .CartItem-count {
     padding: 5px 10px;
     border: 1px solid #ccc;
@@ -25,3 +30,4 @@
 .CartItem-removeOne {
     border-right: none;
 }
+
