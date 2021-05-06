@@ -28,6 +28,13 @@ class App extends React.Component {
     });
   }
 
+  handleRemoveOne = (item) => {
+    const index = this.state.cart.indexOf(item.id);
+    this.setState({
+      cart: [...this.state.cart.slice(0, index), ...this.state.cart.slice(index + 1)]
+    })
+  }
+
   // Count how many of each item is in the cart
   renderCart() {
     let itemCounts = this.state.cart.reduce((itemCounts, itemId) => {
@@ -49,7 +56,7 @@ class App extends React.Component {
     });
 
     return (
-      <CartPage items={cartItems}/>
+      <CartPage items={cartItems} onAddOne={this.handleAddToCart} onRemoveOne={this.handleRemoveOne}/>
     )
   }
 
